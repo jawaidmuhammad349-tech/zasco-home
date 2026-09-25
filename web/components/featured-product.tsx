@@ -61,7 +61,7 @@ export function FeaturedProduct() {
             <defs>
               <path id="seal-circle" d="M62,62 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0" />
             </defs>
-            <text fill="#fff" fontWeight="700" fontSize="11.5" letterSpacing="3.2" style={{ fontFamily: "var(--body)" }}>
+            <text fill="#0E2A33" fontWeight="700" fontSize="11.5" letterSpacing="3.2" style={{ fontFamily: "var(--body)" }}>
               <textPath href="#seal-circle">FEATURED · FEATURED · FEATURED ·</textPath>
             </text>
           </svg>

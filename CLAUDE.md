@@ -104,3 +104,8 @@ pip install playwright && python -m playwright install chromium   # if not alrea
 mkdir -p out && python logo.py && python build.py
 ```
 Edit page text/colours in `build.py`, then re-run `python build.py`.
+
+## Website (web/, Next.js) — decisions since the brand kit
+- Owner chose to keep the bold site look (Bricolage Grotesque headings, rounded cards) over the guide's Fraunces/4px style; the guide PDF still needs updating to match.
+- Website palette (owner-approved, Sep 2026): Ink #0E2A33 (dark panels/text), Tangerine #FF6B2C (buttons, accents; use dark ink text on it, not white), burnt tangerine #C4410F for orange text on white. Defined as CSS variables at the top of web/app/globals.css.
+- Live at https://zasco-home.vercel.app (Vercel project pearl-linens/zasco-home, root dir web/, auto-deploys on push to main).

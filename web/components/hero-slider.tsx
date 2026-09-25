@@ -24,7 +24,7 @@ type Slide = {
 const SLIDES: Slide[] = [
   {
     theme: "s-ink",
-    nav: { fg: "#FFFFFF", bg: "#1F3A44" },
+    nav: { fg: "#FFFFFF", bg: "#0E2A33" },
     kicker: { us: "New · The Hotel Collection", pk: "New · The Hotel Collection" },
     title: ["Hotel-soft.", "Fairly", "priced."],
     body: "400 thread-count percale from export-grade mills, checked by us before it reaches your bed.",
@@ -37,7 +37,7 @@ const SLIDES: Slide[] = [
   },
   {
     theme: "s-clay",
-    nav: { fg: "#FFFFFF", bg: "#A94F33" },
+    nav: { fg: "#0E2A33", bg: "#FF6B2C" },
     kicker: { us: "Gift-boxed sets", pk: "Eid & wedding gifting" },
     title: ["Well chosen.", "Well", "made."],
     body: "Complete bedding and bath sets, gift-boxed with a brass ribbon and ready to give.",
@@ -49,7 +49,7 @@ const SLIDES: Slide[] = [
   },
   {
     theme: "s-sand",
-    nav: { fg: "#1F3A44", bg: "#E6DAC6" },
+    nav: { fg: "#0E2A33", bg: "#E6DAC6" },
     kicker: { us: "Bath · 600 GSM", pk: "Bath · 600 GSM" },
     title: ["Heavy towels.", "Fast", "dry."],
     body: "Long-staple cotton terry, weighed and listed in grams so you can compare with anyone.",
