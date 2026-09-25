@@ -1,4 +1,11 @@
-<title>Zasco Home Homepage</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1F3A44">
+<meta name="description" content="Zasco Home: hotel-quality cotton bedding, towels and bath, chosen from export-grade mills and sold at a fair price in the US and Pakistan.">
+<title>Zasco Home | Well chosen. Well made.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600;700&family=Caveat:wght@600&display=swap">
 <style>
@@ -412,8 +419,40 @@ body.us .dmenu a[data-only="us"],body.pk .dmenu a[data-only="pk"],body.us .dbox 
   .grid{gap:22px 10px}
   .sizes{display:none}
 }
+/* ---------- fixes: accessibility, touch, narrow screens ---------- */
+.skip{position:absolute;left:12px;top:-80px;z-index:200;background:var(--ink);color:#fff;padding:12px 18px;border-radius:12px;font-weight:600}
+.skip:focus{top:12px}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.store,.helpline{padding-block:12px;margin-block:-12px}
+.bars button{height:40px}
+.soc{gap:0}.soc a{width:28px;height:32px}
+footer ul{gap:0}footer ul a{display:inline-block;padding-block:5px}
+@media (hover:none){
+  .btn:hover{transform:none}
+  .btn-buy:hover{background:var(--clay);box-shadow:none}
+  .tile:hover img,.promo:hover img,.p:hover .ph img,.post:hover .ph img{transform:none}
+  .tile:hover .lbl{background:rgba(255,255,255,.78);color:inherit}
+  .chk:hover{transform:none;border-color:var(--line)}
+  .p .acts,.p .quick{display:none}
+  .hero:hover .bars button.on i::after{animation-play-state:running}
+}
+@media (max-width:359px){
+  .wrap{padding-inline:10px}
+  header.main .wrap{gap:6px}
+  .hdr-left{gap:2px}
+  .hdr-r,.icons{gap:2px}
+  .ib{width:36px;height:36px}
+  .search{width:36px;height:36px}
+  .logo{gap:6px}
+  .logo svg{width:26px;height:26px}
+  .logo b{font-size:17px}
+  .logo small{font-size:7px;letter-spacing:.5em}
+}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
 
 <div class="mocknote">Zasco Home homepage mockup · stock photos and sample products stand in for real ones</div>
 
@@ -454,7 +493,7 @@ body.us .dmenu a[data-only="us"],body.pk .dmenu a[data-only="pk"],body.us .dbox 
     </nav>
     <div class="hdr-r">
       <form class="search" id="search" role="search">
-        <label for="q" style="position:absolute;left:-9999px">Search</label>
+        <label for="q" class="vh">Search</label>
         <input id="q" type="search" placeholder="Search sheets, towels…">
         <button type="button" class="ib" id="searchBtn" aria-label="Search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
       </form>
@@ -490,7 +529,8 @@ body.us .dmenu a[data-only="us"],body.pk .dmenu a[data-only="pk"],body.us .dbox 
   </aside>
 </div>
 
-<main class="wrap">
+<main id="main">
+<div class="wrap">
 
   <!-- hero slider -->
   <section class="hero" aria-roledescription="carousel" aria-label="Featured" id="hero">
@@ -577,7 +617,7 @@ body.us .dmenu a[data-only="us"],body.pk .dmenu a[data-only="pk"],body.us .dbox 
     <a class="tile b5" href="#"><img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=1400&q=80&auto=format&fit=crop" alt="Bathroom with plants"><span class="lbl">Bath</span></a>
   </section>
 
-</main>
+</div>
 
 <!-- ribbons -->
 <div class="ribbons" aria-hidden="true">
@@ -585,7 +625,7 @@ body.us .dmenu a[data-only="us"],body.pk .dmenu a[data-only="pk"],body.us .dbox 
   <div class="rib two"><div class="track" id="t2"></div></div>
 </div>
 
-<main class="wrap">
+<div class="wrap">
   <!-- featured product -->
   <section class="feat" aria-labelledby="h-feat" style="padding-top:24px">
     <div class="gal">
@@ -628,28 +668,6 @@ body.us .dmenu a[data-only="us"],body.pk .dmenu a[data-only="pk"],body.us .dbox 
       <div class="facts">
         <header><span>Fabric Facts</span><span style="font-weight:500;opacity:.8">Hotel Bath Towel</span></header>
 
-<div class="drawer" id="drawer" aria-hidden="true">
-  <div class="scrim" data-close></div>
-  <aside class="sheet" role="dialog" aria-modal="true" aria-label="Menu">
-    <div class="top">
-      <a class="logo" href="#" aria-label="Zasco Home"><span><b>ZASCO</b><small>HOME</small></span></a>
-      <button class="ib" data-close aria-label="Close menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
-    </div>
-    <nav class="dmenu" aria-label="Main">
-      <a href="#">Home</a><a href="#">Bedding</a><a href="#">Towels</a><a href="#">Bath</a><a href="#">Sets</a>
-      <a href="#" data-only="pk">Wedding &amp; Jahez</a><a href="#" data-only="us">Gifts</a><a href="#">Fabric Guide</a>
-      <a href="#">New In <span class="chip" style="margin-right:auto;margin-left:8px">Eid ’27</span></a>
-    </nav>
-    <div class="dlinks"><a href="#">About</a><a href="#">Shipping &amp; Returns</a><a href="#">Payment</a><a href="#">Our Quality Standard</a><a href="#">Track Order</a><a href="#">Contact</a></div>
-    <div class="dbox">
-      <div class="row"><span>Store</span><button class="store" id="storeBtn2" style="font-size:14px;font-weight:600"><span class="storeLbl">United States · USD $</span></button></div>
-      <div class="row"><span>Language</span><span style="font-weight:600" data-only="us">English</span><span style="font-weight:600" data-only="pk">English · اردو</span></div>
-      <div class="row" data-only="us"><span>Chat with us</span><small>Mon–Sat 9 AM–7 PM ET</small></div>
-      <div class="row" data-only="pk"><span>WhatsApp us</span><small>Daily 10 AM–10 PM PKT</small></div>
-    </div>
-    <div class="dsoc"><span>Instagram</span><span>TikTok</span><span>Facebook</span></div>
-  </aside>
-</div>
         <dl>
           <div><dt>Weight</dt><dd>600 GSM</dd></div>
           <div><dt>Fibre</dt><dd>100% cotton</dd></div>
@@ -661,13 +679,13 @@ body.us .dmenu a[data-only="us"],body.pk .dmenu a[data-only="pk"],body.us .dbox 
       </div>
     </div>
   </section>
-</main>
+</div>
 
 <div class="ribbons" aria-hidden="true" style="height:150px;margin-top:40px">
   <div class="rib one" style="top:40px;transform:rotate(2deg);background:linear-gradient(90deg,var(--peach),var(--mint),var(--sky))"><div class="track" id="t3"></div></div>
 </div>
 
-<main class="wrap">
+<div class="wrap">
   <!-- quality checks (brands row) -->
   <section class="sec" aria-labelledby="h-chk" style="padding-top:48px">
     <div class="head"><div class="eb">Our Standard</div><h2 id="h-chk">What We Check</h2><p>Every product is tested against the Zasco quality standard before it's listed.</p></div>
@@ -682,7 +700,7 @@ body.us .dmenu a[data-only="us"],body.pk .dmenu a[data-only="pk"],body.us .dbox 
       <div class="chk"><b>1:1</b><span>Sample matches bulk</span></div>
     </div>
   </section>
-</main>
+</div>
 
 <!-- shop the feed -->
 <div class="feedbg">
@@ -695,7 +713,7 @@ body.us .dmenu a[data-only="us"],body.pk .dmenu a[data-only="pk"],body.us .dbox 
   </div>
 </div>
 
-<main class="wrap">
+<div class="wrap">
   <!-- journal -->
   <section class="sec" aria-labelledby="h-blog">
     <div class="head"><div class="eb">Fabric Guide</div><h2 id="h-blog">Know Your Cotton</h2><p>Plain-number guides to buying bedding and towels.</p></div>
@@ -707,6 +725,7 @@ body.us .dmenu a[data-only="us"],body.pk .dmenu a[data-only="pk"],body.us .dbox 
     </div>
     <div class="more"><a href="#" class="btn btn-line">Read the Fabric Guide</a></div>
   </section>
+</div>
 </main>
 
 <footer>
@@ -723,7 +742,7 @@ body.us .dmenu a[data-only="us"],body.pk .dmenu a[data-only="pk"],body.us .dbox 
       <div>
         <h4>First look at new colours</h4>
         <p style="margin:0 0 10px">One email when a new set lands.</p>
-        <form class="nl" id="nlf"><label for="nle" style="position:absolute;left:-9999px">Email</label><input id="nle" type="email" placeholder="Your email" required><button class="btn btn-buy" type="submit">Sign up</button></form>
+        <form class="nl" id="nlf"><label for="nle" class="vh">Email</label><input id="nle" type="email" placeholder="Your email" required><button class="btn btn-buy" type="submit">Sign up</button></form>
         <p id="nlok" hidden style="color:#fff;font-weight:600;margin:10px 0 0">You're on the list.</p>
       </div>
     </div>
@@ -817,14 +836,5 @@ body.us .dmenu a[data-only="us"],body.pk .dmenu a[data-only="pk"],body.us .dbox 
   document.getElementById('nlf').addEventListener('submit',function(e){e.preventDefault();document.getElementById('nlok').hidden=false});
 })();
 </script>
-:'🇵🇰 PKR Rs';
-    document.querySelectorAll('[data-us]').forEach(function(p){p.textContent=p.dataset[s]});
-    try{localStorage.setItem('zasco-store',s)}catch(e){}
-  }
-  var saved='us';try{saved=localStorage.getItem('zasco-store')||'us'}catch(e){}
-  setStore(saved==='pk'?'pk':'us');
-  document.getElementById('storeBtn').onclick=document.getElementById('storeBtn2').onclick=function(){setStore(body.classList.contains('us')?'pk':'us')};
-
-  document.getElementById('nlf').addEventListener('submit',function(e){e.preventDefault();document.getElementById('nlok').hidden=false});
-})();
-</script>
+</body>
+</html>
