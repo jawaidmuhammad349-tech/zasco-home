@@ -33,10 +33,10 @@ export const marketStore = {
   },
 };
 
-/** Inline <head> script: applies the saved market before first paint. */
-export const MARKET_BOOT_SCRIPT = `try{if(localStorage.getItem(${JSON.stringify(
+/** Inline <head> script: applies the saved market (and preview colour scheme) before first paint. */
+export const MARKET_BOOT_SCRIPT = `try{var d=document.documentElement;if(localStorage.getItem(${JSON.stringify(
   MARKET_STORAGE_KEY,
-)})==="pk")document.documentElement.dataset.market="pk"}catch(e){}`;
+)})==="pk")d.dataset.market="pk";var t=localStorage.getItem("zasco-theme");if(t)d.dataset.theme=t}catch(e){}`;
 
 /* ---------------- bag ---------------- */
 

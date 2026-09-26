@@ -7,6 +7,7 @@ import { ProductGrid } from "@/components/product-card";
 import {
   CategoryBento, Footer, Journal, PromoBanners, QualityChecks, RibbonSingle, Ribbons, SectionHead, ShopTheFeed, WhatsAppButton,
 } from "@/components/sections";
+import { ThemePicker } from "@/components/theme-picker";
 import { PRODUCTS } from "@/lib/catalog";
 
 export default function Home() {
@@ -65,6 +66,7 @@ export default function Home() {
 
       <Footer />
       <WhatsAppButton />
+      <ThemePicker />
     </>
   );
 }

@@ -87,9 +87,9 @@ export const WhatsAppIcon = ({ size = 28, fill = "#fff" }: P & { fill?: string }
 /** Header monogram (as designed in the homepage mockup). */
 export const LogoMark = ({ size = 36, className }: P) => (
   <svg width={size} height={size} viewBox="0 0 42 42" aria-hidden="true" className={className}>
-    <rect x="1.5" y="1.5" width="39" height="39" rx="3" fill="none" stroke="#0E2A33" strokeWidth="2.2" />
-    <path d="M9 10h24L9 32h24" fill="none" stroke="#0E2A33" strokeWidth="2.6" strokeLinejoin="round" />
-    <path d="M9 15h16M17 27h16" stroke="#FF6B2C" strokeWidth="2.2" />
+    <rect x="1.5" y="1.5" width="39" height="39" rx="3" fill="none" style={{ stroke: "var(--ink)" }} strokeWidth="2.2" />
+    <path d="M9 10h24L9 32h24" fill="none" style={{ stroke: "var(--ink)" }} strokeWidth="2.6" strokeLinejoin="round" />
+    <path d="M9 15h16M17 27h16" style={{ stroke: "var(--clay)" }} strokeWidth="2.2" />
   </svg>
 );
 
