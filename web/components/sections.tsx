@@ -1,5 +1,6 @@
 import { productById, unsplash } from "@/lib/catalog";
-import { PlayIcon, RibbonMark, WhatsAppIcon } from "./icons";
+import { PlayIcon, WhatsAppIcon } from "./icons";
+import { LogoZ } from "./logo";
 import { Photo } from "./photo";
 import { Price } from "./ui";
 import { NewsletterForm } from "./newsletter";
@@ -65,7 +66,7 @@ type RibbonItem = string | { big: string } | { script: string } | { urdu: string
 
 function RibbonTrack({ items }: { items: RibbonItem[] }) {
   const render = (it: RibbonItem, i: number) => {
-    if (it === "mark") return <RibbonMark key={i} />;
+    if (it === "mark") return <LogoZ key={i} className="rmark" />;
     if (typeof it === "string") return <span key={i}>{it}</span>;
     if ("big" in it) return <span key={i} className="big">{it.big}</span>;
     if ("script" in it) return <span key={i} className="script">{it.script}</span>;

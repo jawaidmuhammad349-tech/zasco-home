@@ -13,6 +13,7 @@ const THEMES = [
   { id: "pink", name: "5 · Charcoal + Hot Pink", a: "#1A1A1A", b: "#FF3E7F" },
   { id: "iphone", name: "6 · iPhone 18 Pro: Deep Black + Glacier Blue", a: "#1C1C1E", b: "#9CC3DE" },
   { id: "burgundy", name: "7 · Burgundy + Orange", a: "#5A1426", b: "#FF7A1A" },
+  { id: "logo", name: "8 · Logo colours: Navy + Steel Blue", a: "#122A48", b: "#4E7296" },
 ];
 
 const store = {

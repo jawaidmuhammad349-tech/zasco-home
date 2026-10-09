@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { useDialog } from "@/lib/use-dialog";
 import { HELP_LINKS, MAIN_NAV, StoreSwitch } from "./header";
 import { CloseIcon } from "./icons";
+import { Logo } from "./logo";
 import { useUI } from "./providers";
 
 export function MenuDrawer() {
@@ -18,7 +19,7 @@ export function MenuDrawer() {
       <aside className="sheet" role="dialog" aria-modal="true" aria-label="Menu" ref={sheet}>
         <div className="top">
           <a className="logo" href="#" aria-label="Zasco Home, home page" onClick={close}>
-            <span><b>ZASCO</b><small>HOME</small></span>
+            <Logo />
           </a>
           <button type="button" className="ib" aria-label="Close menu" onClick={close} data-autofocus>
             <CloseIcon />

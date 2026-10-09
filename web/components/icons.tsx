@@ -83,20 +83,3 @@ export const WhatsAppIcon = ({ size = 28, fill = "#fff" }: P & { fill?: string }
     <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 13.9c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4z" />
   </svg>
 );
-
-/** Header monogram (as designed in the homepage mockup). */
-export const LogoMark = ({ size = 36, className }: P) => (
-  <svg width={size} height={size} viewBox="0 0 42 42" aria-hidden="true" className={className}>
-    <rect x="1.5" y="1.5" width="39" height="39" rx="3" fill="none" style={{ stroke: "var(--ink)" }} strokeWidth="2.2" />
-    <path d="M9 10h24L9 32h24" fill="none" style={{ stroke: "var(--ink)" }} strokeWidth="2.6" strokeLinejoin="round" />
-    <path d="M9 15h16M17 27h16" style={{ stroke: "var(--clay)" }} strokeWidth="2.2" />
-  </svg>
-);
-
-/** Z mark used inside the scrolling ribbons. */
-export const RibbonMark = () => (
-  <svg width="36" height="36" viewBox="0 0 42 42" aria-hidden="true">
-    <rect x="2" y="2" width="38" height="38" rx="3" fill="none" stroke="currentColor" strokeWidth="2.6" />
-    <path d="M9 10h24L9 32h24" fill="none" stroke="currentColor" strokeWidth="3" />
-  </svg>
-);

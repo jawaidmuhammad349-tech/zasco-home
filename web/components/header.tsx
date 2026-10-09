@@ -2,9 +2,10 @@
 
 import { useRef, useState } from "react";
 import { marketStore } from "@/lib/stores";
+import { Logo } from "./logo";
 import { useCart, useMarket, useUI } from "./providers";
 import {
-  BagIcon, FacebookIcon, HeadsetIcon, HeartIcon, InstagramIcon, LogoMark, MenuIcon, SearchIcon, TikTokIcon, UserIcon,
+  BagIcon, FacebookIcon, HeadsetIcon, HeartIcon, InstagramIcon, MenuIcon, SearchIcon, TikTokIcon, UserIcon,
 } from "./icons";
 
 export const HELP_LINKS = ["About", "Shipping & Returns", "Payment", "Our Quality Standard", "Track Order", "Contact"];
@@ -97,8 +98,7 @@ export function Header() {
             <MenuIcon />
           </button>
           <a className="logo" href="#" aria-label="Zasco Home, home page">
-            <LogoMark />
-            <span><b>ZASCO</b><small>HOME</small></span>
+            <Logo preload />
           </a>
         </div>
         <nav className="menu" aria-label="Main">
