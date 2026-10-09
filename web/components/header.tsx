@@ -98,7 +98,7 @@ export function Header() {
             <MenuIcon />
           </button>
           <a className="logo" href="#" aria-label="Zasco Home, home page">
-            <Logo preload />
+            <Logo />
           </a>
         </div>
         <nav className="menu" aria-label="Main">

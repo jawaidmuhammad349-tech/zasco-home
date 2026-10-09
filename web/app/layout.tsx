@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { LogoSprite } from "@/components/logo";
 import { Providers } from "@/components/providers";
 import { MARKET_BOOT_SCRIPT } from "@/lib/stores";
 import "./globals.css";
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script dangerouslySetInnerHTML={{ __html: MARKET_BOOT_SCRIPT }} />
       </head>
       <body>
+        <LogoSprite />
         <Providers>{children}</Providers>
       </body>
     </html>
