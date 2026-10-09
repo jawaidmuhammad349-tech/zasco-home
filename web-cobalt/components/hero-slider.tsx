@@ -37,7 +37,7 @@ const SLIDES: Slide[] = [
   },
   {
     theme: "s-clay",
-    nav: { fg: "var(--on-clay)", bg: "var(--clay)" },
+    nav: { fg: "var(--ink)", bg: "#FFFFFF" },
     kicker: { us: "Gift-boxed sets", pk: "Eid & wedding gifting" },
     title: ["Well chosen.", "Well", "made."],
     body: "Complete bedding and bath sets, gift-boxed with a brass ribbon and ready to give.",

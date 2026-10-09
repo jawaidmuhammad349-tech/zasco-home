@@ -551,3 +551,48 @@ footer ul{gap:0}footer ul a{display:inline-block;padding-block:5px}
   .buyrow .qty button{width:38px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ---------- Cobalt page background (whole site sits on #2F5BFF) ---------- */
+:root{
+  --paper:#2F5BFF; --text:#FFFFFF; --muted:rgba(255,255,255,.78); --line:rgba(255,255,255,.28); --soft:rgba(255,255,255,.14);
+  --logo-ink:#FFFFFF; --logo-mid:#111418; --logo-light:#A0B4FF;
+}
+:focus-visible{outline-color:#FFD84D}
+/* light panels keep dark-on-white colours */
+.drawer .sheet,.pcard{--text:#111615;--muted:#5E6866;--line:#E4E6E5;--soft:#F3F3F1;--logo-ink:#111418;--logo-mid:#2F5BFF;--logo-light:#9FB4FF;color:var(--text)}
+.drawer .sheet,.cart-foot{background:#fff}
+/* header + top bar */
+header.main{background:rgba(47,91,255,.94)}
+nav.menu a.on{color:#fff}
+.chip{color:#FFD84D}
+.drawer .chip{color:#2F5BFF}
+.ib .n{background:#fff;color:#2F5BFF}
+.search.open{background:#fff}
+.search.open input,.search.open .ib{color:#111615}
+.nl input{color:#111615}
+.acts button{color:#111615}
+/* section text */
+.head .eb{color:#DCE4FF}
+.head p{color:rgba(255,255,255,.88)}
+.vendor{color:var(--muted)}
+.price{color:#fff}
+.pcard .price{color:var(--ink)}
+.sizes span,.sizes button{color:#111615}
+.sizes span.on,.sizes button.on{background:#111418;color:#fff;border-color:#111418}
+.chk b{color:#fff}
+/* image labels and ribbons sit on light surfaces */
+.tile .lbl,.glass{color:#111418}
+.rib{color:#111418;--logo-ink:#111418;--logo-mid:#2F5BFF;--logo-light:#9FB4FF}
+.rib.two{color:rgba(255,255,255,.75)}
+/* hero: second slide becomes a white panel */
+.s-clay{--bg:#fff;--fg:var(--ink);--soft-fg:#3B4644;--pill-bg:rgba(17,20,24,.07);--pill-fg:var(--ink);--accent:#2F5BFF;--chip:rgba(17,20,24,.25)}
+.s-clay h1,.s-clay .h1{color:var(--ink)}
+.s-clay .btn-white{background:#2F5BFF;color:#fff}
+/* featured product */
+.seal{background:var(--ink)}
+.feat .price{color:#fff}
+.deliv-ic,.trustline li svg{color:#fff}
+.heart.saved{color:#fff}
+.buyrow .btn-buy{background:#fff;color:#111418}
+.buyrow .btn-buy:hover{background:#EAF0FF;box-shadow:0 10px 24px rgba(10,12,15,.25)}
+@media (hover:none){.buyrow .btn-buy:hover{background:#fff;box-shadow:none}}
