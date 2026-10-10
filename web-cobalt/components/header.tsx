@@ -1,43 +1,20 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { marketStore } from "@/lib/stores";
 import { Logo } from "./logo";
-import { useCart, useMarket, useUI } from "./providers";
+import { useCart, useUI } from "./providers";
 import {
   BagIcon, FacebookIcon, HeadsetIcon, HeartIcon, InstagramIcon, MenuIcon, SearchIcon, TikTokIcon, UserIcon,
 } from "./icons";
 
 export const HELP_LINKS = ["About", "Shipping & Returns", "Payment", "Our Quality Standard", "Track Order", "Contact"];
 
-export function StoreSwitch({ className = "store", style }: { className?: string; style?: React.CSSProperties }) {
-  const market = useMarket();
-  const other = market === "us" ? "Pakistan" : "the United States";
-  return (
-    <button
-      type="button"
-      className={className}
-      style={style}
-      aria-label={`Store: ${market === "us" ? "United States" : "Pakistan"}. Switch to ${other}`}
-      onClick={() => marketStore.set(market === "us" ? "pk" : "us")}
-    >
-      <span data-only="us">United States · USD $</span>
-      <span data-only="pk">Pakistan · PKR Rs</span>
-    </button>
-  );
-}
-
 export function UtilityBar() {
   return (
     <div className="util">
       <div className="wrap">
         <div className="l">
-          <StoreSwitch />
-          <span className="sep" />
-          <span className="lang" data-only="us">English</span>
-          <span className="lang" data-only="pk">
-            English · <span className="urdu" lang="ur">اردو</span>
-          </span>
+          <span className="ship-note">Free shipping over $75</span>
         </div>
         <nav aria-label="Help links">
           {HELP_LINKS.map((l) => (
@@ -45,13 +22,9 @@ export function UtilityBar() {
           ))}
         </nav>
         <div className="r">
-          <a className="helpline" href="#" data-only="us">
+          <a className="helpline" href="#">
             <HeadsetIcon />
             Chat with us <small>Mon–Sat 9 AM–7 PM ET</small>
-          </a>
-          <a className="helpline" href="#" data-only="pk">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#1FAF55" aria-hidden="true"><circle cx="12" cy="12" r="9" /></svg>
-            WhatsApp us <small>Daily 10 AM–10 PM PKT</small>
           </a>
           <span className="sep" />
           <div className="soc" aria-label="Social">
@@ -71,10 +44,9 @@ export const MAIN_NAV = [
   { label: "Towels" },
   { label: "Bath" },
   { label: "Sets" },
-  { label: "Wedding & Jahez", only: "pk" },
-  { label: "Gifts", only: "us" },
+  { label: "Gifts" },
   { label: "Fabric Guide" },
-  { label: "New In", chip: "Eid ’27" },
+  { label: "New In" },
 ] as const;
 
 export function Header() {
@@ -108,10 +80,8 @@ export function Header() {
               href="#"
               className={"current" in n ? "on" : undefined}
               aria-current={"current" in n ? "page" : undefined}
-              data-only={"only" in n ? n.only : undefined}
             >
               {n.label}
-              {"chip" in n && <span className="chip">{n.chip}</span>}
             </a>
           ))}
         </nav>

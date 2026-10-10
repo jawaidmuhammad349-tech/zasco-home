@@ -1,5 +1,5 @@
 import { productById, unsplash } from "@/lib/catalog";
-import { PlayIcon, WhatsAppIcon } from "./icons";
+import { PlayIcon } from "./icons";
 import { LogoZ } from "./logo";
 import { Photo } from "./photo";
 import { Price } from "./ui";
@@ -30,10 +30,8 @@ export function PromoBanners() {
         <a className="promo sun" href="#">
           <Photo src={unsplash("1586105251261-72a756497a11")} alt="Bed with a yellow cushion" fill sizes="(max-width: 599px) 100vw, (max-width: 1024px) 100vw, 33vw" />
           <div className="glass">
-            <h3 data-only="pk">Wedding &amp; Jahez</h3>
-            <h3 data-only="us">Build a Set, Save</h3>
-            <p data-only="pk">Complete bedding + bath bundles</p>
-            <p data-only="us">Sheets + duvet + towels, one price</p>
+            <h3>Build a Set, Save</h3>
+            <p>Sheets + duvet + towels, one price</p>
           </div>
         </a>
       </div>
@@ -62,15 +60,14 @@ export function CategoryBento() {
   );
 }
 
-type RibbonItem = string | { big: string } | { script: string } | { urdu: string } | "mark";
+type RibbonItem = string | { big: string } | { script: string } | "mark";
 
 function RibbonTrack({ items }: { items: RibbonItem[] }) {
   const render = (it: RibbonItem, i: number) => {
     if (it === "mark") return <LogoZ key={i} className="rmark" />;
     if (typeof it === "string") return <span key={i}>{it}</span>;
     if ("big" in it) return <span key={i} className="big">{it.big}</span>;
-    if ("script" in it) return <span key={i} className="script">{it.script}</span>;
-    return <span key={i} className="script urdu" lang="ur">{it.urdu}</span>;
+    return <span key={i} className="script">{it.script}</span>;
   };
   // Content is doubled so the loop is seamless.
   return <div className="track">{[...items, ...items].map(render)}</div>;
@@ -80,7 +77,7 @@ export function Ribbons() {
   return (
     <div className="ribbons" aria-hidden="true">
       <div className="rib one">
-        <RibbonTrack items={[{ big: "600 GSM Towels" }, "mark", "Free Returns", { script: "well chosen" }, { big: "Sets, Not Sales" }, "mark", "Real Specs", { urdu: "گھر کا سکون" }]} />
+        <RibbonTrack items={[{ big: "600 GSM Towels" }, "mark", "Free Returns", { script: "well chosen" }, { big: "Sets, Not Sales" }, "mark", "Real Specs"]} />
       </div>
       <div className="rib two">
         <RibbonTrack items={["Percale", "mark", { big: "Sateen" }, "Waffle", { script: "well made" }, { big: "Terry" }, "mark", "Flannel"]} />
@@ -93,7 +90,7 @@ export function RibbonSingle() {
   return (
     <div className="ribbons single" aria-hidden="true">
       <div className="rib one">
-        <RibbonTrack items={[{ big: "Mill-Checked Cotton" }, "mark", "Cash on Delivery · PK", { script: "hotel-soft" }, "30-Night Returns · US", "mark", { big: "Fairly Priced" }]} />
+        <RibbonTrack items={[{ big: "Mill-Checked Cotton" }, "mark", "Free Shipping Over $75", { script: "hotel-soft" }, "30-Night Returns", "mark", { big: "Fairly Priced" }]} />
       </div>
     </div>
   );
@@ -102,8 +99,8 @@ export function RibbonSingle() {
 const CHECKS = [
   ["GSM", "Weight measured, not guessed"],
   ["TC", "Thread count verified"],
-  ["100%", "Fibre content tested"],
-  ["4/5", "Colour-fastness minimum"],
+  ["100%", "Fiber content tested"],
+  ["4/5", "Colorfastness minimum"],
   ["<3%", "Shrinkage after wash"],
   ["OEKO", "Certificate on file, when the mill holds one"],
   ["×3", "Washed before listing"],
@@ -126,8 +123,8 @@ export function QualityChecks() {
 }
 
 const FEED: [string, string][] = [
-  ["1522771739844-6a9f6d5f14af", "karachi-percale-sheet-set"],
-  ["1629140727571-9b5c6f6267b4", "indus-sateen-duvet-cover"],
+  ["1522771739844-6a9f6d5f14af", "classic-percale-sheet-set"],
+  ["1629140727571-9b5c6f6267b4", "signature-sateen-duvet-cover"],
   ["1617325247661-675ab4b64ae2", "sand-linen-blend-quilt"],
   ["1552321554-5fefe8c9ef14", "hotel-bath-towel-pair"],
   ["1618221195710-dd6b41faaea6", "rust-stripe-cushion-covers"],
@@ -139,7 +136,7 @@ export function ShopTheFeed() {
       <div className="wrap">
         <section className="sec" aria-labelledby="h-feed">
           <SectionHead eyebrow="Shop the Feed" title="Homes in Motion" id="h-feed">
-            How our sheets and towels look in real homes, from Karachi to Chicago.
+            How our sheets and towels look in real homes, from Brooklyn to San Diego.
           </SectionHead>
           <div className="feed">
             {FEED.map(([img, id]) => {
@@ -171,7 +168,7 @@ const POSTS = [
   ["1522771739844-6a9f6d5f14af", "2026-09-18", "Sep 18, 2026", "5 min read", "Percale vs sateen: which one sleeps cooler?"],
   ["1639298109207-5a9ccc254481", "2026-09-10", "Sep 10, 2026", "4 min read", "What GSM means, and the towel weight to buy"],
   ["1616594039964-ae9021a400a0", "2026-08-29", "Aug 29, 2026", "6 min read", "Thread count myths: why 400 beats 1,000"],
-  ["1583845112203-29329902332e", "2026-08-14", "Aug 14, 2026", "5 min read", "Building a jahez linen box: a complete checklist"],
+  ["1583845112203-29329902332e", "2026-08-14", "Aug 14, 2026", "5 min read", "Setting up a guest room: the complete linen checklist"],
 ];
 
 export function Journal() {
@@ -204,11 +201,8 @@ export function Footer() {
             <p style={{ margin: "0 0 16px", maxWidth: "34ch" }}>
               We choose from export-grade mills, test the fabric and publish the real specs, so you get better cotton at a fair price.
             </p>
-            <div className="pay" data-only="us" aria-label="Payment methods">
+            <div className="pay" aria-label="Payment methods">
               {["VISA", "MC", "AMEX", "Apple Pay", "Shop Pay", "Klarna"].map((m) => <span key={m}>{m}</span>)}
-            </div>
-            <div className="pay" data-only="pk" aria-label="Payment methods">
-              {["Cash on delivery", "JazzCash", "Easypaisa", "VISA", "MC"].map((m) => <span key={m}>{m}</span>)}
             </div>
           </div>
           <nav aria-labelledby="f-shop">
@@ -220,7 +214,7 @@ export function Footer() {
             <ul>{["Shipping", "Returns & exchanges", "Size guide", "Track order", "Contact"].map((l) => <li key={l}><a href="#">{l}</a></li>)}</ul>
           </nav>
           <div>
-            <h2 className="h4">First look at new colours</h2>
+            <h2 className="h4">First look at new colors</h2>
             <p style={{ margin: "0 0 10px" }}>One email when a new set lands.</p>
             <NewsletterForm />
           </div>
@@ -232,13 +226,5 @@ export function Footer() {
         </div>
       </div>
     </footer>
-  );
-}
-
-export function WhatsAppButton() {
-  return (
-    <a className="wa" href="#" data-only="pk" aria-label="Order on WhatsApp">
-      <WhatsAppIcon />
-    </a>
   );
 }

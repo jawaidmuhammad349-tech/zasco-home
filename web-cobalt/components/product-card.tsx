@@ -27,7 +27,7 @@ export function ProductCard({ p }: { p: Product }) {
       <h3 className="pname"><a href="#">{p.name}</a></h3>
       <Price price={p.price} />
       <div className="rate"><Stars rating={p.rating} /> {p.rating} ({p.reviews})</div>
-      <div className="sw" role="list" aria-label={`${p.colours.length} ${p.colours.length === 1 ? "colour" : "colours"}`}>
+      <div className="sw" role="list" aria-label={`${p.colours.length} ${p.colours.length === 1 ? "color" : "colors"}`}>
         {p.colours.map((c, k) => (
           <i key={c.name} role="listitem" title={c.name} aria-label={c.name} className={k === 0 ? "on" : undefined} style={{ background: c.hex }} />
         ))}

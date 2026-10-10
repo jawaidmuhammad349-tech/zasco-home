@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { LogoSprite } from "@/components/logo";
 import { Providers } from "@/components/providers";
-import { MARKET_BOOT_SCRIPT } from "@/lib/stores";
 import "./globals.css";
 
 // Self-hosted brand fonts (SIL Open Font License), so text renders the same
@@ -25,17 +24,11 @@ const script = localFont({
   variable: "--font-script",
   fallback: ["cursive"],
 });
-const urdu = localFont({
-  src: "./fonts/noto-nastaliq-urdu-arabic-400-normal.woff2",
-  weight: "400",
-  variable: "--font-urdu",
-  preload: false,
-});
 
 export const metadata: Metadata = {
   title: "Zasco Home | Well chosen. Well made.",
   description:
-    "Hotel-quality cotton bedding, towels and bath, chosen from export-grade mills and sold at a fair price in the US and Pakistan.",
+    "Hotel-quality cotton bedding, towels and bath, chosen from export-grade mills and sold at a fair price in the US.",
 };
 
 export const viewport: Viewport = {
@@ -46,14 +39,9 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
-      data-market="us"
-      suppressHydrationWarning
-      className={`${display.variable} ${body.variable} ${script.variable} ${urdu.variable}`}
+      lang="en-US"
+      className={`${display.variable} ${body.variable} ${script.variable}`}
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: MARKET_BOOT_SCRIPT }} />
-      </head>
       <body>
         <LogoSprite />
         <Providers>{children}</Providers>

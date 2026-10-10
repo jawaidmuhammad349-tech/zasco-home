@@ -1,44 +1,8 @@
-// Tiny client-side stores read through useSyncExternalStore, so the server
-// render (US, empty bag) and the first client render always match.
+// Tiny client-side bag store read through useSyncExternalStore, so the server
+// render (empty bag) and the first client render always match.
 
 import { CART_CATALOG } from "./catalog";
-import { MARKET_STORAGE_KEY, type Market } from "./markets";
 
-/* ---------------- market ---------------- */
-
-const MARKET_EVENT = "zasco:market";
-
-export const marketStore = {
-  subscribe(cb: () => void) {
-    const onStorage = (e: StorageEvent) => {
-      if (e.key === MARKET_STORAGE_KEY) marketStore.set(e.newValue === "pk" ? "pk" : "us", false);
-    };
-    window.addEventListener(MARKET_EVENT, cb);
-    window.addEventListener("storage", onStorage);
-    return () => {
-      window.removeEventListener(MARKET_EVENT, cb);
-      window.removeEventListener("storage", onStorage);
-    };
-  },
-  getSnapshot: (): Market => (document.documentElement.dataset.market === "pk" ? "pk" : "us"),
-  getServerSnapshot: (): Market => "us",
-  set(m: Market, persist = true) {
-    document.documentElement.dataset.market = m;
-    if (persist) {
-      try {
-        localStorage.setItem(MARKET_STORAGE_KEY, m);
-      } catch {}
-    }
-    window.dispatchEvent(new Event(MARKET_EVENT));
-  },
-};
-
-/** Inline <head> script: applies the saved market before first paint. */
-export const MARKET_BOOT_SCRIPT = `try{var d=document.documentElement;if(localStorage.getItem(${JSON.stringify(
-  MARKET_STORAGE_KEY,
-)})==="pk")d.dataset.market="pk"}catch(e){}`;
-
-/* ---------------- bag ---------------- */
 
 export type CartLine = { key: string; id: string; variant: string; qty: number };
 

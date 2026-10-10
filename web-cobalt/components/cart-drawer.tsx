@@ -2,27 +2,26 @@
 
 import { useRef, useState } from "react";
 import { CART_CATALOG } from "@/lib/catalog";
-import { MARKETS, formatPrice } from "@/lib/markets";
+import { STORE, formatPrice } from "@/lib/store";
 import { cartStore } from "@/lib/stores";
 import { useDialog } from "@/lib/use-dialog";
-import { BagIcon, CashIcon, CloseIcon, MinusIcon, PlusIcon, TrashIcon, TruckIcon } from "./icons";
+import { BagIcon, CloseIcon, MinusIcon, PlusIcon, TrashIcon, TruckIcon } from "./icons";
 import { Photo } from "./photo";
-import { useCart, useMarket, useUI } from "./providers";
+import { useCart, useUI } from "./providers";
 
 export function CartDrawer() {
   const { panel, close } = useUI();
   const open = panel === "cart";
-  const market = useMarket();
   const { lines, count } = useCart();
   const sheet = useRef<HTMLElement>(null);
   const [checkoutNote, setCheckoutNote] = useState(false);
   useDialog(open, close, sheet);
 
-  const cfg = MARKETS[market];
-  const subtotal = lines.reduce((sum, l) => sum + CART_CATALOG[l.id].price[market] * l.qty, 0);
+  const cfg = STORE;
+  const subtotal = lines.reduce((sum, l) => sum + CART_CATALOG[l.id].price * l.qty, 0);
   const left = Math.max(0, cfg.freeShippingOver - subtotal);
   const progress = Math.min(100, (subtotal / cfg.freeShippingOver) * 100);
-  const money = (n: number) => formatPrice(n, market);
+  const money = (n: number) => formatPrice(n);
 
   return (
     <div className={"drawer cart" + (open ? " open" : "")} id="cart-drawer" inert={!open}>
@@ -49,9 +48,9 @@ export function CartDrawer() {
             <div className="ship-meter" role="status">
               <p>
                 {left > 0 ? (
-                  <>You&apos;re <b>{money(left)}</b> away from free {market === "us" ? "shipping" : "delivery"}.</>
+                  <>You&apos;re <b>{money(left)}</b> away from free shipping.</>
                 ) : (
-                  <><b>Free {market === "us" ? "shipping" : "delivery"}</b> unlocked.</>
+                  <><b>Free shipping</b> unlocked.</>
                 )}
               </p>
               <div className="bar" aria-hidden="true"><i style={{ width: `${progress}%` }} /></div>
@@ -86,7 +85,7 @@ export function CartDrawer() {
                             <PlusIcon size={14} strokeWidth={2} />
                           </button>
                         </div>
-                        <span className="line-price">{money(p.price[market] * l.qty)}</span>
+                        <span className="line-price">{money(p.price * l.qty)}</span>
                       </div>
                     </div>
                   </li>
@@ -96,11 +95,7 @@ export function CartDrawer() {
 
             <div className="cart-foot">
               <div className="cart-perk">
-                {market === "pk" ? (
-                  <><CashIcon /> Cash on delivery available. We confirm every order on WhatsApp before dispatch.</>
-                ) : (
-                  <><TruckIcon /> 30-night returns on every order.</>
-                )}
+                <TruckIcon /> 30-night returns on every order.
               </div>
               <div className="subtotal">
                 <span>Subtotal</span>

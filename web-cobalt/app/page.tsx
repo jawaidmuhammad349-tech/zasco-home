@@ -5,7 +5,7 @@ import { HeroSlider } from "@/components/hero-slider";
 import { MenuDrawer } from "@/components/menu-drawer";
 import { ProductGrid } from "@/components/product-card";
 import {
-  CategoryBento, Footer, Journal, PromoBanners, QualityChecks, RibbonSingle, Ribbons, SectionHead, ShopTheFeed, WhatsAppButton,
+  CategoryBento, Footer, Journal, PromoBanners, QualityChecks, RibbonSingle, Ribbons, SectionHead, ShopTheFeed,
 } from "@/components/sections";
 import { PRODUCTS } from "@/lib/catalog";
 
@@ -64,7 +64,6 @@ export default function Home() {
       </main>
 
       <Footer />
-      <WhatsAppButton />
     </>
   );
 }

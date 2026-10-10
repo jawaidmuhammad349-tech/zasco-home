@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useContext, useMemo, useState, useSyncExternalStore } from "react";
-import { cartStore, marketStore } from "@/lib/stores";
+import { cartStore } from "@/lib/stores";
 
 type Panel = "menu" | "cart" | null;
 type UI = { panel: Panel; open: (p: Exclude<Panel, null>) => void; close: () => void };
@@ -20,10 +20,6 @@ export function useUI() {
   const ui = useContext(UIContext);
   if (!ui) throw new Error("useUI must be used inside <Providers>");
   return ui;
-}
-
-export function useMarket() {
-  return useSyncExternalStore(marketStore.subscribe, marketStore.getSnapshot, marketStore.getServerSnapshot);
 }
 
 export function useCart() {

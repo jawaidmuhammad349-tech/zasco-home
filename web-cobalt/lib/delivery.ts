@@ -1,4 +1,4 @@
-import { MARKETS, type Market } from "./markets";
+import { STORE } from "./store";
 
 export type DeliveryEstimate = {
   /** Minutes left before today's dispatch cut-off, or null if the next cut-off is more than a day away. */
@@ -15,8 +15,8 @@ function wallClock(now: Date, timeZone: string) {
 const label = (d: Date) =>
   d.toLocaleDateString("en-US", { weekday: "short" }) + " " + d.getDate();
 
-export function estimateDelivery(market: Market, now = new Date()): DeliveryEstimate {
-  const cfg = MARKETS[market];
+export function estimateDelivery(now = new Date()): DeliveryEstimate {
+  const cfg = STORE;
   const working = (d: Date) => cfg.workingDays.includes(d.getDay());
   const local = wallClock(now, cfg.timeZone);
 

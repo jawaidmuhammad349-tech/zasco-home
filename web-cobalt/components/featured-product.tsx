@@ -3,9 +3,9 @@
 import { useState, useSyncExternalStore } from "react";
 import { FEATURED as F } from "@/lib/catalog";
 import { estimateDelivery, formatCountdown } from "@/lib/delivery";
-import { BagIcon, CashIcon, ExchangeIcon, HeartIcon, MinusIcon, PlusIcon, ReturnIcon, TruckIcon } from "./icons";
+import { BagIcon, HeartIcon, MinusIcon, PlusIcon, ReturnIcon, TruckIcon } from "./icons";
 import { Photo } from "./photo";
-import { useAddToBag, useMarket } from "./providers";
+import { useAddToBag } from "./providers";
 import { Price, Stars } from "./ui";
 
 // Current minute, read on the client only (0 during server render).
@@ -19,9 +19,8 @@ const minuteClock = {
 };
 
 function DeliveryEstimate() {
-  const market = useMarket();
   const minute = useSyncExternalStore(minuteClock.subscribe, minuteClock.get, minuteClock.server);
-  const est = minute ? estimateDelivery(market, new Date(minute * 60_000)) : null;
+  const est = minute ? estimateDelivery(new Date(minute * 60_000)) : null;
   return (
     <div className="deliv">
       <TruckIcon size={34} className="deliv-ic" />
@@ -100,12 +99,11 @@ export function FeaturedProduct() {
         </div>
         <Price price={F.price} className="price feat-price" style={{ marginTop: 14 }} />
         <div className="stock">
-          {F.summary} · <span data-only="us">Free shipping over $75</span>
-          <span data-only="pk">Cash on delivery available</span>
+          {F.summary} · Free shipping over $75
         </div>
 
         <fieldset className="opt">
-          <legend className="opt-l">Colour: {F.colours[colour].name}</legend>
+          <legend className="opt-l">Color: {F.colours[colour].name}</legend>
           <div className="sw">
             {F.colours.map((c, k) => (
               <button
@@ -173,10 +171,8 @@ export function FeaturedProduct() {
         </div>
 
         <ul className="trustline">
-          <li data-only="us"><TruckIcon />Free shipping over $75</li>
-          <li data-only="us"><ReturnIcon />30-night returns</li>
-          <li data-only="pk"><CashIcon />Cash on delivery</li>
-          <li data-only="pk"><ExchangeIcon />7-day exchange on WhatsApp</li>
+          <li><TruckIcon />Free shipping over $75</li>
+          <li><ReturnIcon />30-night returns</li>
         </ul>
 
         <div className="facts">

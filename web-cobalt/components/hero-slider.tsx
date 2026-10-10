@@ -10,12 +10,12 @@ import { Price } from "./ui";
 type Slide = {
   theme: "s-ink" | "s-clay" | "s-sand";
   nav: { fg: string; bg: string };
-  kicker: { us: string; pk: string };
+  kicker: string;
   title: [string, string, string]; // line 1, accent word, rest of line 2
   body: string;
   cta: { label: string; className: string };
   link: string;
-  chips: { us: string[]; pk: string[] };
+  chips: string[];
   image: { src: string; alt: string };
   stamp?: { value: string; key: string; label: string };
   card: { productId: string; eyebrow: string; name: string };
@@ -25,52 +25,42 @@ const SLIDES: Slide[] = [
   {
     theme: "s-ink",
     nav: { fg: "#FFFFFF", bg: "var(--ink)" },
-    kicker: { us: "New · The Hotel Collection", pk: "New · The Hotel Collection" },
+    kicker: "New · The Hotel Collection",
     title: ["Hotel-soft.", "Fairly", "priced."],
     body: "400 thread-count percale from export-grade mills, checked by us before it reaches your bed.",
     cta: { label: "Shop the collection", className: "btn btn-buy" },
     link: "See the Fabric Facts →",
-    chips: { us: ["400 TC percale", "100% cotton", "Twin – Cal King"], pk: ["400 TC percale", "100% cotton", "Single – King"] },
+    chips: ["400 TC percale", "100% cotton", "Twin – Cal King"],
     image: { src: unsplash("1631049307264-da0ec9d70304"), alt: "A made hotel-style bed with white percale sheets" },
     stamp: { value: "400", key: "Thread count", label: "Cotton percale" },
-    card: { productId: "karachi-percale-sheet-set", eyebrow: "Bestseller", name: "Karachi Percale Sheet Set" },
+    card: { productId: "classic-percale-sheet-set", eyebrow: "Bestseller", name: "Classic Percale Sheet Set" },
   },
   {
     theme: "s-clay",
     nav: { fg: "var(--ink)", bg: "#FFFFFF" },
-    kicker: { us: "Gift-boxed sets", pk: "Eid & wedding gifting" },
+    kicker: "Gift-boxed sets",
     title: ["Well chosen.", "Well", "made."],
     body: "Complete bedding and bath sets, gift-boxed with a brass ribbon and ready to give.",
     cta: { label: "Shop gift sets", className: "btn btn-white" },
     link: "Build your own box →",
-    chips: { us: ["Gift-boxed", "Set price, no coupons", "Gift note included"], pk: ["Gift-boxed", "Set price, no coupons", "Jahez bundles"] },
+    chips: ["Gift-boxed", "Set price, no coupons", "Gift note included"],
     image: { src: unsplash("1616627561950-9f746e330187"), alt: "Striped cotton cushions in rust and cream" },
     card: { productId: "wedding-linen-box", eyebrow: "Gift box", name: "The Wedding Linen Box" },
   },
   {
     theme: "s-sand",
     nav: { fg: "var(--ink)", bg: "#E6DAC6" },
-    kicker: { us: "Bath · 600 GSM", pk: "Bath · 600 GSM" },
+    kicker: "Bath · 600 GSM",
     title: ["Heavy towels.", "Fast", "dry."],
     body: "Long-staple cotton terry, weighed and listed in grams so you can compare with anyone.",
     cta: { label: "Shop towels", className: "btn btn-buy" },
     link: "What GSM means →",
-    chips: { us: ["600 GSM", "Zero-twist terry", "5 colours"], pk: ["600 GSM", "Zero-twist terry", "5 colours"] },
+    chips: ["600 GSM", "Zero-twist terry", "5 colors"],
     image: { src: unsplash("1507652313519-d4e9174996dd"), alt: "A bright bathroom with a freestanding tub" },
     stamp: { value: "600", key: "GSM weight", label: "Zero-twist terry" },
     card: { productId: "hotel-bath-towel-pair", eyebrow: "New", name: "Hotel Bath Towel, pair" },
   },
 ];
-
-function Kicker({ k }: { k: Slide["kicker"] }) {
-  if (k.us === k.pk) return <span className="kicker"><i />{k.us}</span>;
-  return (
-    <>
-      <span className="kicker" data-only="us"><i />{k.us}</span>
-      <span className="kicker" data-only="pk"><i />{k.pk}</span>
-    </>
-  );
-}
 
 export function HeroSlider() {
   const [cur, setCur] = useState(0);
@@ -112,7 +102,7 @@ export function HeroSlider() {
               inert={!on}
             >
               <div className="panel">
-                <Kicker k={sl.kicker} />
+                <span className="kicker"><i />{sl.kicker}</span>
                 {k === 0 ? (
                   <h1>{sl.title[0]}<br /><em>{sl.title[1]}</em> {sl.title[2]}</h1>
                 ) : (
@@ -124,14 +114,7 @@ export function HeroSlider() {
                   <a href="#" className="tlink">{sl.link}</a>
                 </div>
                 <div className="chips">
-                  {sl.chips.us.map((c, i) =>
-                    c === sl.chips.pk[i] ? (
-                      <span key={c}>{c}</span>
-                    ) : (
-                      <span key={c} data-only="us">{c}</span>
-                    ),
-                  )}
-                  {sl.chips.pk.map((c, i) => (c === sl.chips.us[i] ? null : <span key={c} data-only="pk">{c}</span>))}
+                  {sl.chips.map((c) => <span key={c}>{c}</span>)}
                 </div>
               </div>
               <div className="pic">

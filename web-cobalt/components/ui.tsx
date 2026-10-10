@@ -1,21 +1,19 @@
-import { formatPrice } from "@/lib/markets";
+import { formatPrice } from "@/lib/store";
 
-/** Renders both market prices; CSS shows the one for the active store. */
 export function Price({
   price,
   cents = true,
   className = "price",
   style,
 }: {
-  price: { us: number; pk: number };
+  price: number;
   cents?: boolean;
   className?: string;
   style?: React.CSSProperties;
 }) {
   return (
     <span className={className} style={style}>
-      <span data-only="us">{formatPrice(price.us, "us", cents)}</span>
-      <span data-only="pk">{formatPrice(price.pk, "pk")}</span>
+      {formatPrice(price, cents)}
     </span>
   );
 }
