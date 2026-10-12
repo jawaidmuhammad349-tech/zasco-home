@@ -1,7 +1,7 @@
 # Zasco Home website: Black + Cobalt edition (Next.js)
 
 A copy of `web/` locked to the Black + Cobalt colour scheme (no colour picker).
-Live at https://zasco-home-cobalt.vercel.app. Changes here do not affect `web/`,
+Live at https://zasco-cobalt-lkpbl.vercel.app. Changes here do not affect `web/`,
 which is kept as the saved all-themes version.
 
 ## Run it
