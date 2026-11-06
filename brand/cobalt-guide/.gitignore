@@ -1,0 +1,4 @@
+# build outputs (regenerate with: node brand/cobalt-guide/build.js)
+guide.html
+header-mock.html
+header-mock.png
