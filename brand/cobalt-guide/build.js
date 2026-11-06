@@ -7,6 +7,7 @@
 // paths, fonts and app icon straight from web-cobalt/ and writes:
 //   brand/Zasco-Home-Cobalt-Brand-Guide-A4.pdf        297 x 210 mm, for office printers and screens
 //   brand/Zasco-Home-Cobalt-Brand-Guide-A4-print.pdf  303 x 216 mm: A4 plus 3 mm bleed and a trim box, for a print shop
+//   brand/Zasco-Home-Cobalt-Brand-Guide-A4-2up.pdf    A4 portrait, two slides per sheet (10 sheets), for printing on less paper
 
 const fs = require("fs");
 const path = require("path");
@@ -18,6 +19,7 @@ const OUT_HTML = path.join(HERE, "guide.html");
 const OUT = {
   office: path.join(ROOT, "brand", "Zasco-Home-Cobalt-Brand-Guide-A4.pdf"),
   print: path.join(ROOT, "brand", "Zasco-Home-Cobalt-Brand-Guide-A4-print.pdf"),
+  handout: path.join(ROOT, "brand", "Zasco-Home-Cobalt-Brand-Guide-A4-2up.pdf"),
 };
 const PYTHON = process.env.PYTHON || "python3";
 
@@ -789,6 +791,40 @@ const html = (bleed) => `<!doctype html><html lang="en-US"><head><meta charset="
 .page{width:${PAGE_W}px;height:${PAGE_H}px}</style></head>
 <body>${sprite}${pages.join("\n").replace("%%TOC%%", tocHtml)}</body></html>`;
 
+// 2-up: two slides on each A4 portrait sheet. Each slide keeps a white margin
+// so any office printer can print it, and the smallest text is raised so that
+// nothing prints under about 6 pt at this size.
+const HO_MARGIN = 8; // mm, left and right
+const HO_GAP = 6; // mm, between the two slides
+const SLOT_W = (210 - 2 * HO_MARGIN) * MM;
+const HO_SCALE = SLOT_W / PAGE_W;
+const SLOT_H = PAGE_H * HO_SCALE;
+const HANDOUT_CSS = `
+.hsheet{width:210mm;height:1122px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:${HO_GAP}mm;background:#fff;overflow:hidden;break-after:page}
+.hsheet:last-child{break-after:auto}
+.slot{width:${SLOT_W}px;height:${SLOT_H}px;flex-shrink:0;overflow:hidden;position:relative;outline:.25mm solid #C9CFDB}
+.slot .page{width:${PAGE_W}px;height:${PAGE_H}px;zoom:${HO_SCALE}} /* zoom, not transform: a transformed 1280 px box makes Chromium shrink the whole sheet */
+.slot .page.cobalt{background:var(--cobalt)}
+.slot .page.white{background:#fff}
+.sec-label,.foot,.cap,.cap3,.role,.w,.minis p,.dont p,.cgrp h4{font-size:14px}
+.tiny,.cap2,.sw dl,.facts dt{font-size:13.5px}
+.kv dt,.ct td small{font-size:13px}
+.grade{font-size:12.5px}
+.sw p{font-size:14px}
+.ts-spec,.shot p{font-size:14.5px}
+.small,.note-l,.hdr-spec div,.cover-foot,.back-meta,.spec{font-size:15px}
+.dos li{font-size:15.5px}
+`;
+const handout = () => {
+  const slides = pages.map((p) => p.replace(/^<section class="sheet \w+">/, "").replace(/<\/section>$/, ""));
+  const sheets = [];
+  for (let i = 0; i < slides.length; i += 2) {
+    sheets.push(`<section class="hsheet">${slides.slice(i, i + 2).map((x) => `<div class="slot">${x}</div>`).join("")}</section>`);
+  }
+  return `<!doctype html><html lang="en-US"><head><meta charset="utf-8"><title>Zasco Home Brand Guidelines, Cobalt Edition (US)</title><style>${css}${HANDOUT_CSS}</style></head>
+<body>${sprite}${sheets.join("\n").replace("%%TOC%%", tocHtml)}</body></html>`;
+};
+
 // Header mockup: rendered separately as an image because Chromium's PDF output
 // drops backdrop-filter blur.
 const headerMock = `<!doctype html><html><head><meta charset="utf-8"><style>
@@ -849,9 +885,17 @@ async function render() {
     await page.goto("file://" + OUT_HTML);
     await page.evaluate(() => document.fonts.ready);
     await page.pdf({ path: OUT[kind], width, height, scale: SCALE, printBackground: true, margin: { top: 0, right: 0, bottom: 0, left: 0 } });
-    py("finish", OUT[kind], String(bleed ? BLEED_MM : 0));
+    py("finish", OUT[kind], String(bleed ? BLEED_MM : 0), "297", "210");
     console.log(`Wrote ${path.relative(ROOT, OUT[kind])} (${n} pages, ${width} x ${height})`);
   }
+
+  const sheetPage = await browser.newPage({ viewport: { width: Math.round(210 * MM), height: Math.round(297 * MM) } });
+  fs.writeFileSync(OUT_HTML, handout());
+  await sheetPage.goto("file://" + OUT_HTML);
+  await sheetPage.evaluate(() => document.fonts.ready);
+  await sheetPage.pdf({ path: OUT.handout, width: "210mm", height: "297mm", scale: 1, printBackground: true, margin: { top: 0, right: 0, bottom: 0, left: 0 } });
+  py("finish", OUT.handout, "0", "210", "297");
+  console.log(`Wrote ${path.relative(ROOT, OUT.handout)} (${Math.ceil(n / 2)} sheets, 2 slides each, A4 portrait)`);
   await browser.close();
 }
 

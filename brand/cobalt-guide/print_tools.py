@@ -1,8 +1,8 @@
 """Print helpers for the Cobalt Edition brand guide (called by build.js).
 
   python3 print_tools.py fonts            static font instances -> fonts/
-  python3 print_tools.py finish PDF MM    set PDF metadata, and TrimBox/BleedBox
-                                          when the file has MM millimetres of bleed
+  python3 print_tools.py finish PDF MM W H  set PDF metadata, cut the page to W x H mm
+                                            (plus MM mm of bleed) and set TrimBox/BleedBox
 
 Needs: pip install fonttools brotli pypdf
 
@@ -45,13 +45,13 @@ def fonts():
             print(f"  font {out.name}")
 
 
-def finish(pdf_path, bleed_mm):
+def finish(pdf_path, bleed_mm, width_mm="297", height_mm="210"):
     from pypdf import PdfReader, PdfWriter
     from pypdf.generic import RectangleObject
 
     pt = 72 / 25.4
     bleed = float(bleed_mm) * pt
-    tw, th = 297 * pt, 210 * pt  # A4 landscape trim
+    tw, th = float(width_mm) * pt, float(height_mm) * pt  # trim size
     reader = PdfReader(pdf_path)
     writer = PdfWriter(clone_from=reader)
     for page in writer.pages:
@@ -69,7 +69,7 @@ def finish(pdf_path, bleed_mm):
     writer.add_metadata({
         "/Title": "Zasco Home Brand Guidelines, Cobalt Edition (US)",
         "/Author": "Zasco Home",
-        "/Subject": "Brand guidelines, A4 landscape" + (f", {bleed_mm} mm bleed" if bleed else ""),
+        "/Subject": "Brand guidelines, A4 " + ("landscape" if tw > th else "portrait, two slides per sheet") + (f", {bleed_mm} mm bleed" if bleed else ""),
     })
     with open(pdf_path, "wb") as f:
         writer.write(f)
@@ -81,6 +81,6 @@ if __name__ == "__main__":
     if cmd == "fonts":
         fonts()
     elif cmd == "finish":
-        finish(sys.argv[2], sys.argv[3])
+        finish(*sys.argv[2:6])
     else:
         sys.exit(__doc__)
